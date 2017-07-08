@@ -7,20 +7,18 @@ package BANCO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author esdraschaves
  */
 public class ConectaBD {
-    Connection conexao = null;
-    static PreparedStatement sentenca;
-    static String query = "SET search_path TO agencia;";
-    
+       
     
     public static void loadDrive () {
         try {
@@ -35,11 +33,11 @@ public class ConectaBD {
     
     
     public static Connection getConnection () {
-        Connection conexao = null;
+        Connection conn = null;
         
         try {
             System.out.println("Conectando com o servidor!");
-            conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/agencia?currentSchema=agencia","postgres","root");
+            conn = DriverManager.getConnection("jdbc:postgresql://localhost:5432/agencia?currentSchema=agencia","postgres","root");
             System.out.println("Conectado!");            
             
         }catch (SQLException se) {
@@ -47,6 +45,46 @@ public class ConectaBD {
             se.printStackTrace();
         }
         
-        return conexao;
+        return conn;
+    }
+    
+    public static Boolean executeBD(String insert)
+    {
+        Connection conn = null;
+        Statement st = null;
+        try{
+            conn = getConnection();
+            st = conn.createStatement();
+            st.executeUpdate(insert);
+            st.close();
+            conn.close();
+            
+        }catch(SQLException ex){
+            System.out.print("Ocorreu um erro na inserção!\n");
+            ex.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+    
+    public static ResultSet findBD(String find)
+    {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs = null;
+        
+        try {
+            conn = getConnection();
+            st = conn.createStatement();
+            rs = st.executeQuery(find);
+            st.close();
+            conn.close();            
+            
+        } catch (SQLException ex) {
+            System.out.println("Ocorreu um erro ao executar a QUERY!");
+            Logger.getLogger(ConectaBD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return rs;        
     }
 }

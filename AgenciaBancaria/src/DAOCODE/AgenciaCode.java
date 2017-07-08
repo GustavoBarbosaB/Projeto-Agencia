@@ -6,6 +6,7 @@
 package DAOCODE;
 
 import BANCO.ConectaBD;
+import static BANCO.ConectaBD.getConnection;
 import CLASS.Agencia;
 import DAO.AgenciaDAO;
 import java.sql.Connection;
@@ -22,24 +23,23 @@ import java.util.logging.Logger;
  * @author Gustavo
  */
 public class AgenciaCode implements AgenciaDAO {
-    private Connection conn;
-    Statement st;
-    String query;
-    ResultSet rs;
     
+    String query;
+    ResultSet rs;   
     
     @Override
     public ArrayList<Agencia> getAllAgencia(String estado) {
         ArrayList<Agencia> agencias = new ArrayList<>();
+        Connection conn = null;
+        Statement st = null;
                 
         query = "SELECT * FROM agencia a "
-                + "WHERE a.estado="+estado+";";
+                + "WHERE a.estado='"+estado+"';";
        
         
         try{
-            conn = ConectaBD.getConnection();
+            conn = getConnection();
             st = conn.createStatement();
-            
             rs = st.executeQuery(query);
             
             while(rs.next())
@@ -54,6 +54,12 @@ public class AgenciaCode implements AgenciaDAO {
             }
             st.close();
             conn.close();
+            
+            for(Agencia a:agencias)
+            {
+                System.out.println("Agencia: "+a.getNome());
+            }
+           
                 
         }catch(SQLException ex){
             System.out.println("Houve um erro "+ex);
@@ -70,25 +76,13 @@ public class AgenciaCode implements AgenciaDAO {
                 a.getNome()+"','"+
                 a.getCidade()+"','"+
                 a.getEstado()+"');";
+                    
+           if(ConectaBD.executeBD(query))
+               return true;
+                                          
         
         
-        try {
-            
-            conn = ConectaBD.getConnection();
-            st = conn.createStatement();
-            
-            st.executeUpdate(query);
-            
-            st.close();
-            conn.close();
-                                  
-        } catch (SQLException ex) {
-            System.out.println("Houve um erro "+ex);
-            Logger.getLogger(AgenciaCode.class.getName()).log(Level.SEVERE, null, ex);
-            return false;
-        }
-        
-        return true;
+        return false;
     }
 
     @Override
