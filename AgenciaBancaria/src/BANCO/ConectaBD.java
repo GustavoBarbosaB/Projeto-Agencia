@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package banco;
+package BANCO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -16,8 +18,8 @@ import java.sql.Statement;
  */
 public class ConectaBD {
     Connection conexao = null;
-    Statement sentenca;
-    String query = "set search_path to agencia";
+    static PreparedStatement sentenca;
+    static String query = "SET search_path TO agencia;";
     
     
     public static void loadDrive () {
@@ -37,9 +39,8 @@ public class ConectaBD {
         
         try {
             System.out.println("Conectando com o servidor!");
-            //String url = ;
             conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5433/agencia","postgres","root");
-            System.out.println("Conectado!");
+            System.out.println("Conectado!");            
             
         }catch (SQLException se) {
             System.out.println("Não foi possível conectar ao banco de dados.");
