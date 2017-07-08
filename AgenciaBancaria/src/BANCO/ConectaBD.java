@@ -39,7 +39,7 @@ public class ConectaBD {
         
         try {
             System.out.println("Conectando com o servidor!");
-            conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5433/agencia","postgres","root");
+            conexao = DriverManager.getConnection("jdbc:postgresql://localhost:5432/agencia?currentSchema=agencia","postgres","root");
             System.out.println("Conectado!");            
             
         }catch (SQLException se) {

@@ -56,14 +56,13 @@ CREATE TABLE conta (
 	ult_alteracao DATE DEFAULT current_date,
 	tipo_conta VARCHAR(15) DEFAULT 'CORRENTE',
 	CONSTRAINT pkconta PRIMARY KEY(id_conta,agencia),
-	CONSTRAINT fkagencia FOREIGN KEY(agencia) REFERENCES agencia(nome) ON DELETE NO ACTION,
-	CHECK(saldo>=0.0)
+	CONSTRAINT fkagencia FOREIGN KEY(agencia) REFERENCES agencia(nome) ON DELETE NO ACTION
 );
 
 CREATE TABLE poupanca(
 	id_conta INT,
 	agencia VARCHAR(15),
-	taxa_juros NUMERIC(2,2) NOT NULL,
+	taxa_juros NUMERIC(2,2) NOT NULL DEFAULT 0.00,
 	CONSTRAINT pkpoupanca PRIMARY KEY(id_conta,agencia),
 	CONSTRAINT fkconta FOREIGN KEY(agencia,id_conta) REFERENCES conta(agencia,id_conta) ON DELETE NO ACTION
 );

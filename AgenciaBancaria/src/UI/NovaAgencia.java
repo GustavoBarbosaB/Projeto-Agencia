@@ -25,6 +25,7 @@ public class NovaAgencia extends javax.swing.JInternalFrame {
               false, //maximizable
                true);//iconifiable 
         initComponents();
+        txNome.requestFocus();
     }
 
     /**
@@ -133,6 +134,12 @@ public class NovaAgencia extends javax.swing.JInternalFrame {
             nova.setEstado(txEstado.getText());
             
             ag.insertAgencia(nova);
+            
+            JOptionPane.showInternalMessageDialog(this, "Inserido com sucesso!");
+            txNome.setText("");
+            txNome.requestFocus();
+            txCidade.setText("");
+            txEstado.setText("");
             
         }else{
             

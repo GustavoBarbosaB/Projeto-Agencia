@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,7 @@ import java.util.logging.Logger;
  */
 public class AgenciaCode implements AgenciaDAO {
     private Connection conn;
-    PreparedStatement st;
+    Statement st;
     String query;
     ResultSet rs;
     
@@ -37,9 +38,9 @@ public class AgenciaCode implements AgenciaDAO {
         
         try{
             conn = ConectaBD.getConnection();
-            st = conn.prepareStatement(query);
+            st = conn.createStatement();
             
-            rs = st.executeQuery();
+            rs = st.executeQuery(query);
             
             while(rs.next())
             {
@@ -72,10 +73,11 @@ public class AgenciaCode implements AgenciaDAO {
         
         
         try {
-            conn = ConectaBD.getConnection();
-            st = conn.prepareStatement(query);
             
-            rs = st.executeQuery();
+            conn = ConectaBD.getConnection();
+            st = conn.createStatement();
+            
+            st.executeUpdate(query);
             
             st.close();
             conn.close();
@@ -91,7 +93,7 @@ public class AgenciaCode implements AgenciaDAO {
 
     @Override
     public void deleteAgencia(String nome) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
     }
     
 }
