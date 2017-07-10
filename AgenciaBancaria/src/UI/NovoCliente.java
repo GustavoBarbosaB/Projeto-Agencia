@@ -18,7 +18,7 @@ public class NovoCliente extends javax.swing.JInternalFrame {
      * Creates new form NovoCliente
      */
     public NovoCliente() {
-        super("Nova Conta",
+        super("Novo Cliente",
               false, //resizable
                true, //closable
               false, //maximizable

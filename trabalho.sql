@@ -320,7 +320,30 @@ SELECT * FROM dependentes;
 SELECT * FROM cupom;
 
 --------------------- 5 CONSULTAS COM DUAS OU MAIS TABELAS --------------------- 
+--consultar tarifa mensal conta corrente
+SELECT corrente.tarifa_mensal
+FROM cliente,conta,conta_cliente,corrente
+WHERE cliente.id_cliente = conta_cliente.id_cliente AND corrente.id_conta = conta_cliente.id_conta -- AND cliente.id_cliente = x
 
+--nome do gerente
+SELECT funcionarios.num_funcional,funcionarios.nome,cliente.id_cliente,cliente.nome
+FROM funcionarios,cliente
+WHERE cliente.n_gerente = funcionarios.num_funcional -- AND cliente.id_cliente = x
+
+--clientes que efetuaram emprestimo
+SELECT cliente.id_cliente,cliente.nome,emprestimo.id_emprestimo,emprestimo.valor,emprestimo.n_parcelas,emprestimo.agencia
+FROM cliente,emprestimo,emprestimo_cliente
+WHERE cliente.id_cliente = emprestimo_cliente.id_cliente AND emprestimo.id_emprestimo = emprestimo_cliente.id_emprestimo
+
+--verificar saldo da conta
+SELECT cliente.id_cliente,cliente.nome,conta.saldo
+FROM cliente,conta,conta_cliente
+WHERE cliente.id_cliente = conta_cliente.id_cliente AND conta.id_conta = conta_cliente.id_conta --AND cliente.id_cliente = x 
+
+--verificar se um cliente possui cupom
+SELECT cupom.id_cupom,cupom.validade,operacao.descricao
+FROM cliente,conta_cliente,cupom,operacao
+WHERE cliente.id_cliente = conta_cliente.id_cliente AND cupom.id_conta = conta_cliente.id_conta AND cupom.id_operacao = operacao.id_operacao -- AND cliente.id_cliente = x
 
 
 --------------------- 2 CONSULTAS COM AGREGAÇÃO E GROUP BY --------------------- 

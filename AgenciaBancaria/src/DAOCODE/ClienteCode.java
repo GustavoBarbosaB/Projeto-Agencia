@@ -6,7 +6,6 @@
 package DAOCODE;
 
 import BANCO.ConectaBD;
-import CLASS.Agencia;
 import CLASS.Cliente;
 import DAO.ClienteDAO;
 import java.sql.Connection;
@@ -104,5 +103,31 @@ public class ClienteCode implements ClienteDAO{
     public void deleteCliente(String nome) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public Boolean efetuaOperacao(String id_conta, String agencia, String valor, String tipo) {
+        if(tipo.equals("DEPOSITO"))
+            query = "SELECT operacao("+id_conta+",'"+agencia+"',"+valor+",'DEPOSITO');";
+        else if(tipo.equals("SAQUE"))
+            query = "SELECT operacao("+id_conta+",'"+agencia+"',"+valor+",'SAQUE');";
+        
+        try {
+            conn = ConectaBD.getConnection();
+            st = conn.createStatement();
+            st.executeQuery(query);
+            conn.close();
+            st.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Erro ao efetuar operação!");
+            Logger.getLogger(ClienteCode.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        
+        return true;
+    }
+    
+    
     
 }

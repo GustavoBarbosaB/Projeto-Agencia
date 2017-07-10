@@ -18,5 +18,6 @@ public interface ClienteDAO {
     public ArrayList<Cliente> getAllClientes(String estado,String cidade);
     public Boolean insertcliente(String nome, String cpf, String nasc, String endereco, String cidade, String estado, String n_gerente);
     public void deleteCliente(String nome);
+    public Boolean efetuaOperacao(String id_conta,String agencia, String valor, String tipo);
     
 }
