@@ -2,13 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/home/gustavo/Sistema-de-Banco-de-Dados---Projeto-Agencia/AgenciaBancaria/src/UI/Home.java</file>
-            <file>file:/home/gustavo/Sistema-de-Banco-de-Dados---Projeto-Agencia/AgenciaBancaria/src/DAO/AgenciaDAO.java</file>
-            <file>file:/home/gustavo/Sistema-de-Banco-de-Dados---Projeto-Agencia/AgenciaBancaria/src/UI/NovaConta.java</file>
-            <file>file:/home/gustavo/Sistema-de-Banco-de-Dados---Projeto-Agencia/AgenciaBancaria/src/BANCO/ConectaBD.java</file>
-            <file>file:/home/gustavo/Sistema-de-Banco-de-Dados---Projeto-Agencia/AgenciaBancaria/src/CLASS/Agencia.java</file>
-            <file>file:/home/gustavo/Sistema-de-Banco-de-Dados---Projeto-Agencia/AgenciaBancaria/src/UI/ListaCliente.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
