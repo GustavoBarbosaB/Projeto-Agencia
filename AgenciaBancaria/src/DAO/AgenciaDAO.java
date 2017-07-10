@@ -16,4 +16,5 @@ public interface AgenciaDAO {
     public ArrayList<Agencia> getAllAgencia(String estado);
     public Boolean insertAgencia(Agencia a);
     public void deleteAgencia(String nome);
+    public Boolean insertConta(String id_cliente,String data,String agencia,String saldo,String tartax,String tipo);
 }

@@ -196,8 +196,10 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        AgenciaCode ag = new AgenciaCode();
-        ag.getAllAgencia("MG");
+        NovoCliente nCliente = new NovoCliente();
+        jHome.add(nCliente);
+        centralizar(nCliente);
+        nCliente.setVisible(true);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed

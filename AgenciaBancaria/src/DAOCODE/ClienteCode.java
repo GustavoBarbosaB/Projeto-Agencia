@@ -17,21 +17,31 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
+/**'
  *
  * @author gustavo
  */
 public class ClienteCode implements ClienteDAO{
     String query=null;
     ResultSet rs=null;
+    Connection conn = null;
+    Statement st = null;
+    
     
     
     @Override
     public ArrayList<Cliente> getAllClientes(String estado, String cidade) {
-        Connection conn = null;
-        Statement st = null;
+        
         ArrayList<Cliente> clientes = null;
-        String query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente AND UPPER(c.cidade)='"+cidade+"' AND UPPER(c.estado)='"+estado+"';";
+       
+        
+        if(cidade.equals("")){
+            if(estado.equals("")){
+                query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente;";
+            }else
+                query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente AND UPPER(c.estado)='"+estado+"';";   
+        }else
+         query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente AND UPPER(c.cidade)='"+cidade+"' AND UPPER(c.estado)='"+estado+"';";
                
         try {
             conn = ConectaBD.getConnection();
@@ -64,8 +74,30 @@ public class ClienteCode implements ClienteDAO{
     }
 
     @Override
-    public Boolean insertcliente(Agencia a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean insertcliente(String nome, String cpf, String nasc, String endereco, String cidade, String estado, String n_gerente) {
+        
+        if(n_gerente.equals(""))
+            query = "INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado)"
+                    + " VALUES ('"+nome+"','"+cpf+"','"+nasc+"','"+endereco+"','"+cidade+"','"+estado+"');";
+        else
+            query = "INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente)"
+                    + " VALUES ('"+nome+"','"+cpf+"','"+nasc+"','"+endereco+"','"+cidade+"','"+estado+"',"+n_gerente+");";
+                
+                
+        try {
+            conn = ConectaBD.getConnection();
+            st = conn.createStatement();
+            st.executeUpdate(query);
+            st.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Erro ao tentar inserir Cliente!");
+            Logger.getLogger(ClienteCode.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        return true;
     }
 
     @Override

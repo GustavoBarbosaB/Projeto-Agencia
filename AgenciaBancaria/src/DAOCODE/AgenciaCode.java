@@ -24,13 +24,14 @@ import java.util.logging.Logger;
 public class AgenciaCode implements AgenciaDAO {
     
     String query;
-    ResultSet rs;   
+    ResultSet rs;  
+    Connection conn = null;
+    Statement st = null;
     
     @Override
     public ArrayList<Agencia> getAllAgencia(String estado) {
         ArrayList<Agencia> agencias = new ArrayList<>();
-        Connection conn = null;
-        Statement st = null;
+        
                 
         query = "SELECT * FROM agencia a "
                 + "WHERE a.estado='"+estado+"';";
@@ -87,6 +88,26 @@ public class AgenciaCode implements AgenciaDAO {
     @Override
     public void deleteAgencia(String nome) {
         
+    }
+
+    @Override
+    public Boolean insertConta(String id_cliente, String data, String agencia, String saldo, String tartax, String tipo) {
+        query = "SELECT nova_conta("+id_cliente+",'"+data+"','"+agencia+"',"+saldo+",'"+tipo+"',"+tartax+");";
+        
+        try {
+            conn = ConectaBD.getConnection();
+            st = conn.createStatement();
+            st.executeQuery(query);
+            st.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            System.out.println("Erro ao tentar inserir Conta!");
+            Logger.getLogger(ClienteCode.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+        
+        return true;
     }
     
 }
