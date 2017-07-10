@@ -6,6 +6,7 @@
 package DAO;
 
 import CLASS.Agencia;
+import CLASS.Cupom;
 import java.util.ArrayList;
 
 /**
@@ -13,8 +14,9 @@ import java.util.ArrayList;
  * @author Gustavo
  */
 public interface AgenciaDAO {
-    public ArrayList<Agencia> getAllAgencia(String estado);
+    public ArrayList<Cupom> getAllCupons();
     public Boolean insertAgencia(Agencia a);
     public void deleteAgencia(String nome);
     public Boolean insertConta(String id_cliente,String data,String agencia,String saldo,String tartax,String tipo);
+   
 }

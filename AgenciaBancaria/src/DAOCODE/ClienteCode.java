@@ -38,9 +38,12 @@ public class ClienteCode implements ClienteDAO{
             if(estado.equals("")){
                 query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente;";
             }else
-                query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente AND UPPER(c.estado)='"+estado+"';";   
+                query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente AND UPPER(c.estado) ILIKE '%"+estado+"%';";   
+        
+        }else if(estado.equals("")){
+            query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente AND UPPER(c.cidade) ILIKE '%"+cidade+"%';";
         }else
-         query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente AND UPPER(c.cidade)='"+cidade+"' AND UPPER(c.estado)='"+estado+"';";
+            query = "SELECT * FROM cliente c,conta_cliente cc,conta ct WHERE ct.id_conta=cc.id_conta AND ct.agencia=cc.agencia AND c.id_cliente=cc.id_cliente AND UPPER(c.cidade) ILIKE '%"+cidade+"%' AND UPPER(c.estado) ILIKE '%"+estado+"%';";
                
         try {
             conn = ConectaBD.getConnection();

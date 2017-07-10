@@ -8,6 +8,7 @@ package DAOCODE;
 import BANCO.ConectaBD;
 import static BANCO.ConectaBD.getConnection;
 import CLASS.Agencia;
+import CLASS.Cupom;
 import DAO.AgenciaDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -29,12 +30,11 @@ public class AgenciaCode implements AgenciaDAO {
     Statement st = null;
     
     @Override
-    public ArrayList<Agencia> getAllAgencia(String estado) {
-        ArrayList<Agencia> agencias = new ArrayList<>();
+    public ArrayList<Cupom> getAllCupons() {
+        ArrayList<Cupom> cupons = new ArrayList<>();
         
                 
-        query = "SELECT * FROM agencia a "
-                + "WHERE a.estado='"+estado+"';";
+        query = "SELECT * FROM cupom";
        
         
         try{
@@ -44,29 +44,26 @@ public class AgenciaCode implements AgenciaDAO {
             
             while(rs.next())
             {
-                Agencia a = new Agencia();
+                Cupom a = new Cupom();
                 
-                a.setNome(rs.getString("nome"));
-                a.setCidade(rs.getString("cidade"));
-                a.setEstado(rs.getString("estado"));
+                a.setId(rs.getString("id_cupom"));
+                a.setValidade(rs.getString("validade"));
+                a.setId_conta(rs.getString("id_conta"));
+                a.setAgencia(rs.getString("agencia"));
+                a.setId_operacao(rs.getString("id_operacao"));
                 
-                agencias.add(a);
+                cupons.add(a);
             }
             st.close();
             conn.close();
-            
-            for(Agencia a:agencias)
-            {
-                System.out.println("Agencia: "+a.getNome());
-            }
-           
+                  
                 
         }catch(SQLException ex){
             System.out.println("Houve um erro "+ex);
             Logger.getLogger(AgenciaCode.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        return agencias;
+        return cupons;
     }
 
     @Override
@@ -109,5 +106,6 @@ public class AgenciaCode implements AgenciaDAO {
         
         return true;
     }
-    
+
+      
 }
