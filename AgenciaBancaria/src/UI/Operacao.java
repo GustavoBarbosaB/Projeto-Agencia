@@ -138,13 +138,20 @@ public class Operacao extends javax.swing.JInternalFrame {
         ClienteCode cCode = new ClienteCode();
         
         if(deposito.isSelected()){
-            cCode.efetuaOperacao(id_conta.getText(),agencia.getText(),valor.getText(),"DEPOSITO");
-            JOptionPane.showMessageDialog(this,"Deposito efetuado!");
-            this.dispose();
+            if(cCode.efetuaOperacao(id_conta.getText(),agencia.getText(),valor.getText(),"DEPOSITO")){
+                JOptionPane.showMessageDialog(this,"Deposito efetuado!");
+                this.dispose();
+            }else{
+                JOptionPane.showMessageDialog(this,"A conta não é corrente!");
+            }    
         }else if(saque.isSelected()){
-            cCode.efetuaOperacao(id_conta.getText(),agencia.getText(),valor.getText(),"SAQUE");
-            JOptionPane.showMessageDialog(this,"Saque efetuado!");
-            this.dispose();
+            
+            if(cCode.efetuaOperacao(id_conta.getText(),agencia.getText(),valor.getText(),"SAQUE")){
+                JOptionPane.showMessageDialog(this,"Saque efetuado!");
+                this.dispose();
+            }else{
+                JOptionPane.showConfirmDialog(this,"A conta não é corrente!");
+            }    
         }else 
             JOptionPane.showMessageDialog(this,"Selecione a operação!");
     }//GEN-LAST:event_efetuarActionPerformed
