@@ -190,9 +190,6 @@ BEGIN
 		SET saldo=saldo-valor 
 			WHERE id_conta=id_contaAux AND agencia=agenciaAux;
 	END IF;
-
-	
-
 END
 $$ LANGUAGE plpgsql;
 ---------------------------------------------------------------------------------
@@ -297,12 +294,10 @@ INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (4,4);
 INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (5,5);
 
 
-SELECT deposito(1,'Santos Drummond',5900.00); --FAZER MAIS 4
+SELECT deposito(1,'Santos Drummond',5900.00,'DEPOSITO'); --FAZER MAIS 4
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-
-
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
