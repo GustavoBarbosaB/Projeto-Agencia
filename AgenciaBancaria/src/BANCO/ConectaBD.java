@@ -13,10 +13,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
- * @author esdraschaves
- */
+
 public class ConectaBD {
        
     
@@ -67,24 +64,5 @@ public class ConectaBD {
         return true;
     }
     
-    public static ResultSet findBD(String find)
-    {
-        Connection conn = null;
-        Statement st = null;
-        ResultSet rs = null;
-        
-        try {
-            conn = getConnection();
-            st = conn.createStatement();
-            rs = st.executeQuery(find);
-            st.close();
-            conn.close();            
-            
-        } catch (SQLException ex) {
-            System.out.println("Ocorreu um erro ao executar a QUERY!");
-            Logger.getLogger(ConectaBD.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return rs;        
-    }
+    
 }
