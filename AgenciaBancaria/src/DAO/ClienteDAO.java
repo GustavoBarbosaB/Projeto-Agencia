@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public interface ClienteDAO {
     
-    public ArrayList<Cliente> getAllClientes(String estado);
+    public ArrayList<Cliente> getAllClientes(String estado,String cidade);
     public Boolean insertcliente(Agencia a);
     public void deleteCliente(String nome);
     
