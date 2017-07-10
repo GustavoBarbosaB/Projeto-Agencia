@@ -1,6 +1,6 @@
-CREATE SCHEMA agencia AUTHORIZATION postgres;
+﻿CREATE SCHEMA agencia AUTHORIZATION postgres;
 SET search_path TO agencia;
-
+SET datestyle TO european;
 -----------------------------------------------
 
 CREATE TABLE agencia (
@@ -294,7 +294,7 @@ INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (4,4);
 INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (5,5);
 
 
-SELECT deposito(1,'Santos Drummond',5900.00,'DEPOSITO'); --FAZER MAIS 4	
+SELECT operacao(1,'Santos Drummond',5900.00,'DEPOSITO'); --FAZER MAIS 4	
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
