@@ -166,9 +166,9 @@ END
 $$ LANGUAGE plpgsql;
 
 /*
-	Esta funçõa cria uma nova conta, para isto
-	basta passar como argumento os dados do cliente, da agencia e conta.
-	OBS: para usa-la é necessário ter o cliente e a agencia já cadastrados.
+	Esta funçõa cria uma operação, podendo ser ela de saque ou deposito
+	em caso de saque ele debita o valor da conta e em caso de deposito
+	ele credita o valor na conta.
 */
 
 CREATE OR REPLACE FUNCTION operacao(id_contaAux INT,agenciaAux VARCHAR(15),valor NUMERIC(30,2),tipo VARCHAR(10)) 
@@ -294,7 +294,7 @@ INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (4,4);
 INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (5,5);
 
 
-SELECT deposito(1,'Santos Drummond',5900.00,'DEPOSITO'); --FAZER MAIS 4
+SELECT deposito(1,'Santos Drummond',5900.00,'DEPOSITO'); --FAZER MAIS 4	
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
