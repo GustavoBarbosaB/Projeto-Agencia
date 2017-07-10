@@ -171,15 +171,27 @@ $$ LANGUAGE plpgsql;
 	OBS: para usa-la é necessário ter o cliente e a agencia já cadastrados.
 */
 
-CREATE OR REPLACE FUNCTION deposito(id_contaAux INT,agenciaAux VARCHAR(15),valor NUMERIC(30,2)) 
+CREATE OR REPLACE FUNCTION operacao(id_contaAux INT,agenciaAux VARCHAR(15),valor NUMERIC(30,2),tipo VARCHAR(10)) 
 RETURNS void AS $$
 BEGIN
+	IF (UPPER(tipo)='DEPOSITO') THEN
 	INSERT INTO operacao(agencia,id_conta,valor,descricao,data) 
 		VALUES (agenciaAux,id_contaAux,valor,'DEPOSITO',current_date);
 
 	UPDATE conta 
 		SET saldo=saldo+valor 
 			WHERE id_conta=id_contaAux AND agencia=agenciaAux;
+
+	ELSEIF(UPPER(tipo)='SAQUE') THEN
+	INSERT INTO operacao(agencia,id_conta,valor,descricao,data) 
+		VALUES (agenciaAux,id_contaAux,valor,'SAQUE',current_date);
+
+	UPDATE conta 
+		SET saldo=saldo-valor 
+			WHERE id_conta=id_contaAux AND agencia=agenciaAux;
+	END IF;
+
+	
 
 END
 $$ LANGUAGE plpgsql;
