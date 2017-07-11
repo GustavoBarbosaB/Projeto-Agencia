@@ -150,7 +150,7 @@ public class Operacao extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this,"Saque efetuado!");
                 this.dispose();
             }else{
-                JOptionPane.showConfirmDialog(this,"A conta não é corrente ou não existe!");
+                JOptionPane.showMessageDialog(this,"A conta não é corrente ou não existe!");
             }    
         }else 
             JOptionPane.showMessageDialog(this,"Selecione a operação!");

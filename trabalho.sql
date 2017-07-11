@@ -119,7 +119,6 @@ CREATE TABLE cliente(
 );
 
 CREATE SEQUENCE seqConta START 1 INCREMENT BY 1;
--- Criar Store Procedure para inserir conta
 
 CREATE TABLE conta (
 	id_conta INT DEFAULT NEXTVAL('seqConta'),
@@ -249,19 +248,19 @@ RETURNS void AS $$
 BEGIN
 	IF (UPPER(tipo)='DEPOSITO') THEN
 	INSERT INTO operacao(agencia,id_conta,valor,descricao,data) 
-		VALUES (agenciaAux,id_contaAux,valor,'DEPOSITO',current_date);
+		VALUES ((SELECT nome FROM agencia WHERE nome ILIKE agenciaAux),id_contaAux,valor,'DEPOSITO',current_date);
 
 	UPDATE conta 
 		SET saldo=saldo+valor 
-			WHERE id_conta=id_contaAux AND agencia=agenciaAux;
+			WHERE id_conta=id_contaAux AND agencia ILIKE agenciaAux;
 
 	ELSEIF(UPPER(tipo)='SAQUE') THEN
 	INSERT INTO operacao(agencia,id_conta,valor,descricao,data) 
-			VALUES (agenciaAux,id_contaAux,valor,'SAQUE',current_date);
+			VALUES ((SELECT nome FROM agencia WHERE nome ILIKE agenciaAux),id_contaAux,valor,'SAQUE',current_date);
 
 	UPDATE conta 
 		SET saldo=saldo-valor 
-			WHERE id_conta=id_contaAux AND agencia=agenciaAux;
+			WHERE id_conta=id_contaAux AND agencia ILIKE agenciaAux;
 	END IF;
 END
 $$ LANGUAGE plpgsql;
