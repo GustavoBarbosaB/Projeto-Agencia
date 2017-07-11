@@ -1,3 +1,75 @@
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-----------------------------1 - MER --------------------------------------------
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+/*
+ESTÁ NO ARQUIVO MER-banco.png
+*/
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-----------------------------2 - MR --------------------------------------------
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+/*
+ESTÁ NO ARQUIVO modelo-relacional.png
+*/
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-----------------------------3 - Normalização -----------------------------------
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+/*
+Normalização
+A normalização de um banco de dados (BD) é realizada na etapa do modelo
+relacional (MR) e tem o objetivo de evitar certas inconsistências no projeto do BD.
+Esses erros incluem a repetição de informações, a perda de informações e até a
+inabilidade de representar certas informações.
+Uma das inconsistências que a normalização visa corrigir é a de dependências
+funcionais. Essa é uma restrição entre dois conjuntos de atributos de um esquema de
+relação relacional. É uma propriedade da semântica ou do significado dos atributos do
+BD. Essas dependências e informações são fornecidas pelo próprio projetista. Dessa
+forma, a inconsistência da dependência funcional pode apresentar os problemas
+descritos anteriormente e podem ocorrer com a movimentação natural do BD se ele
+não for planejado com essa questão em mente.
+Por esse motivo, faz-se imprescindível que uma etapa de normalização do
+projeto de BD seja efetuada para evitar tal problemas no futuro. Dessa forma, o modelo
+relacional desse trabalho foi analisado com o intuito de identificar tal casos e corrigi-los
+por meio dos métodos apresentados pelo professor em aula. Porém, devido aos
+métodos também apresentados pelo professor em aula para montar o MR a partir do
+modelo entidade-relação (MER), não foram precisos medidas adicionais de
+normalização, uma vez que esses métodos já garantiram que o modelo relacional
+obtido esteja na forma 3FN (Terceira Forma Normal).
+Em suma, a normalização de um projeto de banco de dados é de extrema
+importância para que a consistência das dependências formais de um BD seja mantida
+ao longo de sua atividade. Porém, devido ao fato de os métodos apresentados em sala
+para montar o MR a partir do MER já levarem em consideração a normalização do
+projeto, não foram necessárias ações adicionais para que o modelo relacional final
+estivesse na forma adequada de normalização, a 3FN.
+
+*/
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-----------------------------5 - Implementação ----------------------------------
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 CREATE SCHEMA agencia AUTHORIZATION postgres;
 SET search_path TO agencia;
 
@@ -159,7 +231,8 @@ BEGIN
 			VALUES (id_conta,agencia,tarifa_ou_taxa);
 	END IF;
 	
-	INSERT INTO conta_cliente VALUES (id_cliente,agencia,id_conta,data_criacao);
+	INSERT INTO conta_cliente 
+		VALUES (id_cliente,agencia,id_conta,data_criacao);
 	
 
 END
@@ -184,7 +257,7 @@ BEGIN
 
 	ELSEIF(UPPER(tipo)='SAQUE') THEN
 	INSERT INTO operacao(agencia,id_conta,valor,descricao,data) 
-		VALUES (agenciaAux,id_contaAux,valor,'SAQUE',current_date);
+			VALUES (agenciaAux,id_contaAux,valor,'SAQUE',current_date);
 
 	UPDATE conta 
 		SET saldo=saldo-valor 
@@ -229,49 +302,83 @@ CREATE TRIGGER cupom_trigger AFTER
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
------------------------------ INSERÇÕES -----------------------------------------
+----------------------------- ALIMENTAÇÃO ---------------------------------------
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 
 
-INSERT INTO agencia (nome,cidade,estado) VALUES ('Itamarati','São Paulo','SP');
-INSERT INTO agencia (nome,cidade,estado) VALUES ('Jaburu' ,'Belo Horizonte', 'MG');
-INSERT INTO agencia (nome,cidade,estado) VALUES ('Santos Drummond','Ribeirao Preto','SP');
-INSERT INTO agencia (nome,cidade,estado) VALUES ('Pitangueiras','São Paulo','SP');
-INSERT INTO agencia (nome,cidade,estado) VALUES ('Getulio Vargas','Rio de Janeiro','RJ');
+INSERT INTO agencia (nome,cidade,estado) 
+	VALUES ('Itamarati','São Paulo','SP');
+INSERT INTO agencia (nome,cidade,estado) 
+	VALUES ('Jaburu' ,'Belo Horizonte', 'MG');
+INSERT INTO agencia (nome,cidade,estado) 
+	VALUES ('Santos Drummond','Ribeirao Preto','SP');
+INSERT INTO agencia (nome,cidade,estado) 
+	VALUES ('Pitangueiras','São Paulo','SP');
+INSERT INTO agencia (nome,cidade,estado) 
+	VALUES ('Getulio Vargas','Rio de Janeiro','RJ');
 
-INSERT INTO emprestimo(valor,n_parcelas,agencia) VALUES (750.00,3,'Santos Drummond');
-INSERT INTO emprestimo(valor,n_parcelas,agencia) VALUES (1500.00,2,'Itamarati');
-INSERT INTO emprestimo(valor,n_parcelas,agencia) VALUES (12000.00,5,'Itamarati');
-INSERT INTO emprestimo(valor,n_parcelas,agencia) VALUES (2400.00,3,'Itamarati');
-INSERT INTO emprestimo(valor,n_parcelas,agencia) VALUES (1500.00,2,'Pitangueiras');
+INSERT INTO emprestimo(valor,n_parcelas,agencia) 
+	VALUES (750.00,3,'Santos Drummond');
+INSERT INTO emprestimo(valor,n_parcelas,agencia) 
+	VALUES (1500.00,2,'Itamarati');
+INSERT INTO emprestimo(valor,n_parcelas,agencia) 
+	VALUES (12000.00,5,'Itamarati');
+INSERT INTO emprestimo(valor,n_parcelas,agencia) 
+	VALUES (2400.00,3,'Itamarati');
+INSERT INTO emprestimo(valor,n_parcelas,agencia) 
+	VALUES (1500.00,2,'Pitangueiras');
 
-INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) VALUES (15232,01133074696,'João Vedrasco','Itamarati',15232);
-INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) VALUES (17263,01133074623,'Kleber Santana','Itamarati',15232);
-INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) VALUES (12364,01133864533,'João Santana', 'Itamarati',15232);
-INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) VALUES (72631,03434510983,'Gabriel Rodrigues' ,'Jaburu',72631);
-INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) VALUES (72342,03434510876,'Guilherme Becckerman','Jaburu',72631);
-INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) VALUES (32642,01133075244,'Joelma Da Cunha','Pitangueiras',32642);
-INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) VALUES (52312,01633074455,'Luanna Costa','Santos Drummond',52312);
+INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) 
+	VALUES (15232,01133074696,'João Vedrasco','Itamarati',15232);
+INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) 
+	VALUES (17263,01133074623,'Kleber Santana','Itamarati',15232);
+INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) 
+	VALUES (12364,01133864533,'João Santana', 'Itamarati',15232);
+INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) 
+	VALUES (72631,03434510983,'Gabriel Rodrigues' ,'Jaburu',72631);
+INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) 
+	VALUES (72342,03434510876,'Guilherme Becckerman','Jaburu',72631);
+INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) 
+	VALUES (32642,01133075244,'Joelma Da Cunha','Pitangueiras',32642);
+INSERT INTO funcionarios(num_funcional,telefone,nome,agencia,num_superv) 
+	VALUES (52312,01633074455,'Luanna Costa','Santos Drummond',52312);
 
-INSERT INTO dependentes (nome,num_funcionario) VALUES ('Carlos Pacheco',15232);
-INSERT INTO dependentes (nome,num_funcionario) VALUES ('João Vedrasco Junior',15232);
-INSERT INTO dependentes (nome,num_funcionario) VALUES ('Isadora Bottion',17263);
-INSERT INTO dependentes (nome,num_funcionario) VALUES ('Mariana Costa',52312);
-INSERT INTO dependentes (nome,num_funcionario) VALUES ('Jhon Becckerman',72342);
+INSERT INTO dependentes (nome,num_funcionario) 
+	VALUES ('Carlos Pacheco',15232);
+INSERT INTO dependentes (nome,num_funcionario) 
+	VALUES ('João Vedrasco Junior',15232);
+INSERT INTO dependentes (nome,num_funcionario) 
+	VALUES ('Isadora Bottion',17263);
+INSERT INTO dependentes (nome,num_funcionario) 
+	VALUES ('Mariana Costa',52312);
+INSERT INTO dependentes (nome,num_funcionario) 
+	VALUES ('Jhon Becckerman',72342);
 
-INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Guilherme Figueiredo','42159869821','2006/11/26','Alameda Pitangueiras','São Carlos','SP',52312);
-INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Lucas Varella' ,'45256231232','1994/03/21','Rua Antonio Carvalho', 'Ribeirão Preto','SP' ,52312);
-INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('André Riul' ,'52342143212','1964/06/25','Rua Maestral D', 'São Paulo','SP',17263);
-INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Giovanna Arcais','49582314502','1949/06/25','Avenida Prof Juvenilla','São Paulo','SP',12364);
-INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Daniel Outis' ,'39492394923','1977/03/17','Avenida Belarmino Pacheco', 'Belo Horizonte', 'MG',72631);
-INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Jorgin de lá','42152456320','1988/08/12','Avenida AIAI MEU GZUS' ,'São paulo','SP',32642) ;
-INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Marco de sá','42523242312','1977/04/15','Avenida Santos do mar ','São Paulo','SP',32642);
-INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Joesley Batista','92039294212','1963/08/19','Avenida oloro meu','Belo Horizonte','MG',72631);
-INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Gustavo Barbosa','92039294222','04-10-1996','Avenida cisca dois','Araguari','MG',52312);
-INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Bruno Barbosa','92039294222','04-10-1996','Avenida cisca dois','Araguari','MG',72631);
-INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Vitor Basso','45039294222','04-12-1993','Rua Euripedes','Uberlandia','MG',17263);
-INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) VALUES ('Antonio Vilela','45039294222','03-11-1993','Rua Alameda 2','Uberlandia','MG',17263);
+INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Guilherme Figueiredo','42159869821','2006/11/26','Alameda Pitangueiras','São Carlos','SP',52312);
+INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Lucas Varella' ,'45256231232','1994/03/21','Rua Antonio Carvalho', 'Ribeirão Preto','SP' ,52312);
+INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('André Riul' ,'52342143212','1964/06/25','Rua Maestral D', 'São Paulo','SP',17263);
+INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Giovanna Arcais','49582314502','1949/06/25','Avenida Prof Juvenilla','São Paulo','SP',12364);
+INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Daniel Outis' ,'39492394923','1977/03/17','Avenida Belarmino Pacheco', 'Belo Horizonte', 'MG',72631);
+INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Jorgin de lá','42152456320','1988/08/12','Avenida AIAI MEU GZUS' ,'São paulo','SP',32642) ;
+INSERT INTO cliente(nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Marco de sá','42523242312','1977/04/15','Avenida Santos do mar ','São Paulo','SP',32642);
+INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Joesley Batista','92039294212','1963/08/19','Avenida oloro meu','Belo Horizonte','MG',72631);
+INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Gustavo Barbosa','92039294222','04-10-1996','Avenida cisca dois','Araguari','MG',52312);
+INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Bruno Barbosa','92039294222','04-10-1996','Avenida cisca dois','Araguari','MG',72631);
+INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Vitor Basso','45039294222','04-12-1993','Rua Euripedes','Uberlandia','MG',17263);
+INSERT INTO Cliente (nome,cpf,data_nasc,endereco,cidade,estado,n_gerente) 
+	VALUES ('Antonio Vilela','45039294222','03-11-1993','Rua Alameda 2','Uberlandia','MG',17263);
 
 
 SELECT nova_conta(1,'20-06-2013','Santos Drummond',12000.00,'CORRENTE',0.2);
@@ -287,25 +394,73 @@ SELECT nova_conta(11,'23-06-2013','Pitangueiras',645.00,'POUPANCA',0.2);
 SELECT nova_conta(12,'22-06-2013','Itamarati',369.00,'CORRENTE',0.2);
 SELECT nova_conta(10,'22-05-2013','Pitangueiras',3639.00,'CORRENTE',0.2);
 
-INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (2,1);
-INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (3,2);
-INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (3,3);
-INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (4,4);
-INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (5,5);
+INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) 
+	VALUES (2,1);
+INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) 
+	VALUES (3,2);
+INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) 
+	VALUES (3,3);
+INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) 
+	VALUES (4,4);
+INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) 
+	VALUES (5,5);
 
 
 SELECT operacao(1,'Santos Drummond',5900.00,'DEPOSITO'); 
 SELECT operacao(7,'Jaburu',5900.00,'SAQUE'); 
 SELECT operacao(9,'Santos Drummond',5900.00,'DEPOSITO'); 
 SELECT operacao(11,'Itamarati',5900.00,'SAQUE'); 	
-SELECT operacao(3,'Pitangueiras',5900.00,'DEPOSITO'); 	
+SELECT operacao(3,'Pitangueiras',5900.00,'DEPOSITO'); 
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
------------------------------ CONSULTAS -----------------------------------------
+----------------------------- Atualização do BD----------------------------------
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+-- INSERÇÃO ----------------------------------
+SELECT operacao(1,'Santos Drummond',500.00,'SAQUE'); 
+
+-- REMOÇÃO ----------------------------------
+
+--TENTA DELETAR UM FUNCIONARIO QUE É GERENTE
+DELETE FROM funcionarios
+WHERE funcionarios.num_funcional=52312;
+
+--DELETA UM FUNCIONARIO QUE É SUPERVISOR
+DELETE FROM funcionarios
+WHERE funcionarios.num_funcional=15232;
+
+--DELETA O CLIENTE GUILHERME FIGUEIREDO
+DELETE FROM cliente c
+WHERE c.id_cliente=1;
+
+
+-- ATUALIZAÇÃO ----------------------------------
+--Atualiza o telefone do cliente 8
+UPDATE cliente
+set telefone = '33074696'
+where id_cliente = 8;
+
+-- Atualiza o telefone do funcionario 32642 
+UPDATE funcionarios 
+SET telefone = '32425559'
+WHERE num_funcional=32642;
+
+-- Adiciona como supervisor do funcionario 52312 o gerente do cliente 3
+UPDATE funcionarios 
+SET num_superv = (SELECT c.n_gerente FROM cliente c WHERE c.id_cliente=3)
+WHERE num_funcional=52312;
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-----------------------------6- CONSULTAS ---------------------------------------
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 
@@ -337,17 +492,17 @@ WHERE cliente.n_gerente = funcionarios.num_funcional -- AND cliente.id_cliente =
 --clientes que efetuaram emprestimo
 SELECT cliente.id_cliente,cliente.nome,emprestimo.id_emprestimo,emprestimo.valor,emprestimo.n_parcelas,emprestimo.agencia
 FROM cliente,emprestimo,emprestimo_cliente
-WHERE cliente.id_cliente = emprestimo_cliente.id_cliente AND emprestimo.id_emprestimo = emprestimo_cliente.id_emprestimo
+WHERE cliente.id_cliente = emprestimo_cliente.id_cliente AND emprestimo.id_emprestimo = emprestimo_cliente.id_emprestimo;
 
 --verificar saldo da conta
 SELECT cliente.id_cliente,cliente.nome,conta.saldo
 FROM cliente,conta,conta_cliente
-WHERE cliente.id_cliente = conta_cliente.id_cliente AND conta.id_conta = conta_cliente.id_conta --AND cliente.id_cliente = x 
+WHERE cliente.id_cliente = conta_cliente.id_cliente AND conta.id_conta = conta_cliente.id_conta; --AND cliente.id_cliente = x 
 
 --verificar se um cliente possui cupom
 SELECT cupom.id_cupom,cupom.validade,operacao.descricao
 FROM cliente,conta_cliente,cupom,operacao
-WHERE cliente.id_cliente = conta_cliente.id_cliente AND cupom.id_conta = conta_cliente.id_conta AND cupom.id_operacao = operacao.id_operacao -- AND cliente.id_cliente = x
+WHERE cliente.id_cliente = conta_cliente.id_cliente AND cupom.id_conta = conta_cliente.id_conta AND cupom.id_operacao = operacao.id_operacao; -- AND cliente.id_cliente = x
 
 
 --------------------- 2 CONSULTAS COM AGREGAÇÃO E GROUP BY --------------------- 
@@ -385,3 +540,15 @@ SELECT e.agencia, MAX(valor)
 FROM emprestimo e
 GROUP BY e.agencia
 HAVING COUNT(e.agencia)>2;
+
+
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-----------------------------APLICAÇÃO ------------------------------------------
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+-- ESTÁ NA PASTA, É UM PROJETO DO NETBEANS
