@@ -7,6 +7,7 @@ package BANCO;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -59,6 +60,31 @@ public class ConectaBD {
             return false;
         }
         return true;
+    }
+    
+    public static Boolean testaBD(String query)
+    {
+        Connection conn = null;
+        Statement st = null;
+        ResultSet rs;
+        Boolean ret = true;
+        try{
+            conn = getConnection();
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+            
+            if(!rs.next())//não tem
+               ret = false;
+            
+            st.close();
+            conn.close();
+            
+        }catch(SQLException ex){
+            System.out.print("Ocorreu um erro na busca!");
+            ex.printStackTrace();
+            return false;
+        }
+        return ret;
     }
     
     

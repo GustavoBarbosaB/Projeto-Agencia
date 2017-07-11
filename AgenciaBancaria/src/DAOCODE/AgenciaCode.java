@@ -9,6 +9,7 @@ import BANCO.ConectaBD;
 import static BANCO.ConectaBD.getConnection;
 import CLASS.Agencia;
 import CLASS.Cupom;
+import CLASS.Funcionario;
 import DAO.AgenciaDAO;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -105,6 +106,57 @@ public class AgenciaCode implements AgenciaDAO {
         }
         
         return true;
+    }
+
+    @Override
+    public ArrayList<Funcionario> getAllFuncionarios() {
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        
+                
+        query = "SELECT * FROM funcionarios";
+       
+        
+        try{
+            conn = getConnection();
+            st = conn.createStatement();
+            rs = st.executeQuery(query);
+            
+            while(rs.next())
+            {
+                Funcionario a = new Funcionario();
+                
+                a.setNum_funcional(rs.getString("num_funcional"));
+                a.setNome(rs.getString("nome"));
+                a.setAgencia(rs.getString("agencia"));
+                
+               funcionarios.add(a);
+            }
+            st.close();
+            conn.close();
+                  
+                
+        }catch(SQLException ex){
+            System.out.println("Houve um erro "+ex);
+            Logger.getLogger(AgenciaCode.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return funcionarios;
+    }
+
+    @Override
+    public void delete(String del) {
+        
+        try{
+            conn = getConnection();
+            st = conn.createStatement();
+            st.executeUpdate(del);         
+            st.close();
+            conn.close();                  
+                
+        }catch(SQLException ex){
+            System.out.println("Houve um erro "+ex);
+            Logger.getLogger(AgenciaCode.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
       

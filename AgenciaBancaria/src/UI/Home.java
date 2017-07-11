@@ -6,10 +6,8 @@
 package UI;
 
 import BANCO.ConectaBD;
-import DAOCODE.AgenciaCode;
 import java.awt.Dimension;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -66,7 +64,10 @@ public class Home extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem7 = new javax.swing.JMenuItem();
+        jSeparator4 = new javax.swing.JPopupMenu.Separator();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jSeparator5 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem9 = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
 
@@ -132,6 +133,11 @@ public class Home extends javax.swing.JFrame {
         jMenu3.setText("Deletar");
 
         jMenuItem8.setText("Funcionário");
+        jMenuItem8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem8ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem8);
 
         jMenuBar1.add(jMenu3);
@@ -145,6 +151,7 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem7);
+        jMenu4.add(jSeparator4);
 
         jMenuItem6.setText("Cupom");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
@@ -153,6 +160,15 @@ public class Home extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem6);
+        jMenu4.add(jSeparator5);
+
+        jMenuItem9.setText("Clientes");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem9);
 
         jMenuBar1.add(jMenu4);
 
@@ -213,7 +229,7 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-        ListaCliente lsCliente = new ListaCliente();
+        ListaContasClientes lsCliente = new ListaContasClientes();
         jHome.add(lsCliente);
         centralizar(lsCliente);
                 
@@ -258,6 +274,20 @@ public class Home extends javax.swing.JFrame {
        centralizar(lcupom);
        lcupom.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
+       DeletaFuncionario delFunc = new DeletaFuncionario();
+       jHome.add(delFunc);
+       centralizar(delFunc);
+       delFunc.setVisible(true);
+    }//GEN-LAST:event_jMenuItem8ActionPerformed
+
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+       ListaClientes lista = new ListaClientes();
+       jHome.add(lista);
+       centralizar(lista);
+       lista.setVisible(true);
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -311,8 +341,11 @@ public class Home extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
+    private javax.swing.JPopupMenu.Separator jSeparator4;
+    private javax.swing.JPopupMenu.Separator jSeparator5;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,7 +29,7 @@ public class ClienteCode implements ClienteDAO{
     
     
     @Override
-    public ArrayList<Cliente> getAllClientes(String estado, String cidade) {
+    public ArrayList<Cliente> getAllContasClientes(String estado, String cidade) {
         
         ArrayList<Cliente> clientes = null;
        
@@ -129,6 +129,40 @@ public class ClienteCode implements ClienteDAO{
         
         
         return true;
+    }
+
+    @Override
+    public ArrayList<Cliente> getAllClientes() {
+       
+        ArrayList<Cliente> clientes = null;
+        
+        try {
+            conn = ConectaBD.getConnection();
+            st = conn.createStatement();
+            rs = st.executeQuery("SELECT * FROM cliente;");
+            
+            clientes = new ArrayList<>();
+            Cliente c;
+            
+            while(rs.next())
+            {
+                c = new Cliente();
+                c.setId_cliente(rs.getString("id_cliente"));
+                c.setNome(rs.getString("nome"));
+                c.setCidade(rs.getString("cidade"));
+                c.setEstado(rs.getString("estado"));
+               
+                clientes.add(c);
+            }         
+           
+            st.close();
+            conn.close();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ClienteCode.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return clientes;
     }
     
     

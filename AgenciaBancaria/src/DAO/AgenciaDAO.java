@@ -7,6 +7,7 @@ package DAO;
 
 import CLASS.Agencia;
 import CLASS.Cupom;
+import CLASS.Funcionario;
 import java.util.ArrayList;
 
 /**
@@ -18,5 +19,7 @@ public interface AgenciaDAO {
     public Boolean insertAgencia(Agencia a);
     public void deleteAgencia(String nome);
     public Boolean insertConta(String id_cliente,String data,String agencia,String saldo,String tartax,String tipo);
+    public ArrayList<Funcionario> getAllFuncionarios();
+    public void delete(String del);
    
 }

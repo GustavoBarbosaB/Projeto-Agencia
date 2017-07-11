@@ -294,7 +294,11 @@ INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (4,4);
 INSERT INTO emprestimo_cliente(id_cliente,id_emprestimo) VALUES (5,5);
 
 
-SELECT deposito(1,'Santos Drummond',5900.00,'DEPOSITO'); --FAZER MAIS 4	
+SELECT operacao(1,'Santos Drummond',5900.00,'DEPOSITO'); 
+SELECT operacao(7,'Jaburu',5900.00,'SAQUE'); 
+SELECT operacao(9,'Santos Drummond',5900.00,'DEPOSITO'); 
+SELECT operacao(11,'Itamarati',5900.00,'SAQUE'); 	
+SELECT operacao(3,'Pitangueiras',5900.00,'DEPOSITO'); 	
 
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
@@ -376,7 +380,7 @@ GROUP BY a.nome
 HAVING COUNT(a.nome)>=2;
 
 -- maior valor de emprestimo por agencia. Mostrar as agencia com mais de 2 emprestimos
--- Listar o nome da agencia e o maior valor emprestado.
+-- Listar o nome da agencia e o maior valor emprestado por cada.
 SELECT e.agencia, MAX(valor) 
 FROM emprestimo e
 GROUP BY e.agencia

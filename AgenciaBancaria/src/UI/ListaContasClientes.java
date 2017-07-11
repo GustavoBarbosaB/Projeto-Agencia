@@ -15,14 +15,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author gustavo
  */
-public class ListaCliente extends javax.swing.JInternalFrame {
+public class ListaContasClientes extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form ListaCliente
+     * Creates new form ListaContasClientes
      */
     DefaultTableModel dtm;
     
-    public ListaCliente() {
+    public ListaContasClientes() {
         super("Buscar Clientes",
               false, //resizable
                true, //closable
@@ -30,6 +30,7 @@ public class ListaCliente extends javax.swing.JInternalFrame {
                true);//iconifiable 
         initComponents();
         dtm = (DefaultTableModel) jtable.getModel();
+        tablelist();
         
     }
 
@@ -165,19 +166,20 @@ public class ListaCliente extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        
+        tablelist();      
+    }//GEN-LAST:event_jButton1ActionPerformed
+    private void tablelist()
+    {
         dtm.setRowCount(0);
         ClienteDAO cdao = new ClienteCode();
         ArrayList<Cliente> clientes;
         
-        clientes = cdao.getAllClientes(estado.getText(),cidade.getText());
+        clientes = cdao.getAllContasClientes(estado.getText(),cidade.getText());
 
         for(Cliente c:clientes){
             dtm.addRow(new String[]{c.getId_cliente(),c.getNome(),c.getEstado(),c.getCidade(),c.getSaldo()});
         }
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
-
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField cidade;
