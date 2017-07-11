@@ -10,6 +10,26 @@ package CLASS;
  * @author gustavo
  */
 public class Cliente {
+    
+    private String id_cliente;
+    private String nome;
+    private String cidade;
+    private String saldo;    
+    private String estado;
+    private String tipo;
+    private String id_conta;
+    private String agencia;
+    private String gerente;
+
+    public String getGerente() {
+        return gerente;
+    }
+
+    public void setGerente(String gerente) {
+        this.gerente = gerente;
+    }
+    
+    
 
     public String getId_cliente() {
         return id_cliente;
@@ -50,11 +70,31 @@ public class Cliente {
         this.estado = estado;
     }
     
-    private String id_cliente;
-    private String nome;
-    private String cidade;
-    private String saldo;    
-    private String estado;
+   
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+
+    public String getId_conta() {
+        return id_conta;
+    }
+
+    public void setId_conta(String id_conta) {
+        this.id_conta = id_conta;
+    }
+       public String getAgencia() {
+        return agencia;
+    }
+
+    public void setAgencia(String agencia) {
+        this.agencia = agencia;
+    }
+    
 
   
        

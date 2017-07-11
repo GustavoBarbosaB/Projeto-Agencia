@@ -61,6 +61,12 @@ public class ClienteCode implements ClienteDAO{
                 c.setCidade(rs.getString("cidade"));
                 c.setEstado(rs.getString("estado"));
                 c.setSaldo(rs.getString("saldo"));
+                c.setTipo(rs.getString("tipo_conta"));
+                c.setId_conta(rs.getString("id_conta"));
+                c.setAgencia(rs.getString("agencia"));
+                c.setGerente(rs.getString("n_gerente"));
+                
+                
                
                 clientes.add(c);
             }         
@@ -151,6 +157,7 @@ public class ClienteCode implements ClienteDAO{
                 c.setNome(rs.getString("nome"));
                 c.setCidade(rs.getString("cidade"));
                 c.setEstado(rs.getString("estado"));
+                c.setGerente(rs.getString("n_gerente"));
                
                 clientes.add(c);
             }         

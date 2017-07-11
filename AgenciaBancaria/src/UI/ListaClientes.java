@@ -68,14 +68,14 @@ public class ListaClientes extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Estado", "Cidade"
+                "Id", "Nome", "Estado", "Cidade", "Gerente"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -116,7 +116,7 @@ public class ListaClientes extends javax.swing.JInternalFrame {
         clientes = cdao.getAllClientes();
 
         for(Cliente c:clientes){
-            dtm.addRow(new String[]{c.getId_cliente(),c.getNome(),c.getEstado(),c.getCidade()});
+            dtm.addRow(new String[]{c.getId_cliente(),c.getNome(),c.getEstado(),c.getCidade(),c.getGerente()});
         }
     }
 

@@ -92,14 +92,14 @@ public class ListaContasClientes extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "Id", "Nome", "Estado", "Cidade", "Valor"
+                "Id", "Nome", "Estado", "Cidade", "Valor", "ID Conta", "Agência", "Tipo"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -111,6 +111,10 @@ public class ListaContasClientes extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane3.setViewportView(jtable);
+        if (jtable.getColumnModel().getColumnCount() > 0) {
+            jtable.getColumnModel().getColumn(0).setResizable(false);
+            jtable.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -118,7 +122,7 @@ public class ListaContasClientes extends javax.swing.JInternalFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 474, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 845, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
@@ -177,7 +181,7 @@ public class ListaContasClientes extends javax.swing.JInternalFrame {
         clientes = cdao.getAllContasClientes(estado.getText(),cidade.getText());
 
         for(Cliente c:clientes){
-            dtm.addRow(new String[]{c.getId_cliente(),c.getNome(),c.getEstado(),c.getCidade(),c.getSaldo()});
+            dtm.addRow(new String[]{c.getId_cliente(),c.getNome(),c.getEstado(),c.getCidade(),c.getSaldo(),c.getId_conta(),c.getAgencia(),c.getTipo()});
         }
     }
 
