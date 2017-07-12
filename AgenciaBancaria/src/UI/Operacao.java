@@ -138,7 +138,7 @@ public class Operacao extends javax.swing.JInternalFrame {
         ClienteCode cCode = new ClienteCode();
         
         if(deposito.isSelected()){
-            if(cCode.efetuaOperacao(id_conta.getText(),agencia.getText(),valor.getText(),"DEPOSITO")){
+            if(cCode.efetuaOperacao(id_conta.getText(),agencia.getText()+"%",valor.getText(),"DEPOSITO")){
                 JOptionPane.showMessageDialog(this,"Deposito efetuado!");
                 this.dispose();
             }else{
@@ -146,7 +146,7 @@ public class Operacao extends javax.swing.JInternalFrame {
             }    
         }else if(saque.isSelected()){
             
-            if(cCode.efetuaOperacao(id_conta.getText(),agencia.getText(),valor.getText(),"SAQUE")){
+            if(cCode.efetuaOperacao(id_conta.getText(),agencia.getText()+"%",valor.getText(),"SAQUE")){
                 JOptionPane.showMessageDialog(this,"Saque efetuado!");
                 this.dispose();
             }else{
