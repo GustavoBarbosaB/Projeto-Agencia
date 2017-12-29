@@ -9,9 +9,9 @@ Quesitos como segurança não são tratados na aplicação.
 - Modelo Relacional
 - Normalização
 - Scripts SQL:
-  - Criação do Banco (DDL)
-  - Inserção no Banco (DML)
-- Código JAVA 
+  - Criação do Banco (DDL)
+  - Inserção no Banco (DML)
+- Códificação JAVA 
 
 # Ferramentas usadas:
 * IDE - NetBeans
