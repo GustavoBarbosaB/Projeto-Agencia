@@ -8,7 +8,7 @@ Quesitos como segurança não são tratados na aplicação.
 - Modelo entidade relacionamento
 - Modelo Relacional
 - Normalização
-- Scripts SQL
+- Scripts SQL:
   - Criação do Banco (DDL)
   - Inserção no Banco (DML)
 - Código JAVA 
