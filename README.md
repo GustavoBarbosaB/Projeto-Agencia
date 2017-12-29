@@ -5,16 +5,18 @@ Este projeto foi desenvolvido na disciplina de Sistemas de Banco de dados. Nele 
 Quesitos como segurança não são tratados na aplicação.
 
 # Conteúdo do projeto:
-* Modelo entidade relacionamento
-* Modelo Relacional
-* Normalização
-* Scripts SQL
-  * Criação do Banco (DDL)
-  * Inserção no Banco (DML)
-  
+- Modelo entidade relacionamento
+- Modelo Relacional
+- Normalização
+- Scripts SQL
+  - Criação do Banco (DDL)
+  - Inserção no Banco (DML)
+- Código JAVA 
+
 # Ferramentas usadas:
 * IDE - NetBeans
 * SGBD - PostgreeSQL
+* Linguagem JAVA
 
 
 
